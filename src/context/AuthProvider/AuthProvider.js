@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  GithubAuthProvider,
+  GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
@@ -16,21 +18,12 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  // register with email and password
   const createUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
-  const providerLogIn = (provider) => {
-    return signInWithPopup(auth, provider);
-  };
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+  // Log in  with email password
   const emailPassSignIn = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
@@ -49,7 +42,27 @@ const AuthProvider = ({ children }) => {
     });
     return () => unSubscribe();
   }, []);
-
+  const providerLogIn = (provider) => {
+    return signInWithPopup(auth, provider);
+  };
+  // google log in
+  const googleProvider = new GoogleAuthProvider();
+  const handleGoogleSignin = () => {
+    providerLogIn(googleProvider)
+      .then((result) => {
+        const user = result.user;
+      })
+      .catch((error) => console.error(error));
+  };
+  // git log in
+  const gitProvider = new GithubAuthProvider();
+  const handleGithubSignin = () => {
+    providerLogIn(gitProvider)
+      .then((result) => {
+        const user = result.user;
+      })
+      .catch((error) => console.error(error));
+  };
   const authInfo = {
     user,
     loading,
@@ -57,7 +70,10 @@ const AuthProvider = ({ children }) => {
     providerLogIn,
     emailPassSignIn,
     logOut,
+    handleGoogleSignin,
+    handleGithubSignin,
   };
+
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );
