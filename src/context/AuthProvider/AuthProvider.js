@@ -8,6 +8,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import { createContext } from "react";
 import app from "../../firebase/firebase.init";
@@ -23,6 +24,10 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
+
+  const updateUserProfile = (profile) => { 
+    return updateProfile(auth.currentUser, profile);
+  }
   // Log in  with email password
   const emailPassSignIn = (email, password) => {
     setLoading(true);
@@ -69,6 +74,7 @@ const AuthProvider = ({ children }) => {
     createUser,
     providerLogIn,
     emailPassSignIn,
+    updateUser: updateUserProfile,
     logOut,
     handleGoogleSignin,
     handleGithubSignin,

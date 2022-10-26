@@ -6,6 +6,8 @@ import ErrorPage from "../../pages/ErrorPage/ErrorPage";
 import Home from "../../pages/Home/Home";
 import Login from "../../pages/Login/Login";
 import Register from "../../pages/Register/Register";
+import UserDetails from "../../pages/UserDetails/UserDetails";
+import PrivateRoutes from "../privateRoutes/PrivateRoutes";
 
 export const routes = createBrowserRouter([
   {
@@ -18,7 +20,19 @@ export const routes = createBrowserRouter([
       },
       {
         path: "courses",
-        element: <Courses></Courses>,
+        element: (
+          <PrivateRoutes>
+            <Courses></Courses>
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "userProfile",
+        element: (
+          <PrivateRoutes>
+            <UserDetails></UserDetails>
+          </PrivateRoutes>
+        ),
       },
       {
         path: "blog",

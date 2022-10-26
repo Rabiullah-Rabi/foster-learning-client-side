@@ -1,33 +1,58 @@
 import React, { useContext, useState } from "react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import PasswordChecklist from "react-password-checklist";
-import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const { user, handleGithubSignin, handleGoogleSignin, createUser } =
-    useContext(AuthContext);
+  const {
+    user,
+    handleGithubSignin,
+    handleGoogleSignin,
+    createUser,
+    updateUser,
+  } = useContext(AuthContext);
   const navigate = useNavigate();
   const loaction = useLocation();
   const from = loaction.state?.from?.pathname || "/";
   const handleRegisterForm = (event) => {
     event.preventDefault();
+
     const form = event.target;
-    const name = form.firstName.value + " " + form.lastName.value;
+    const name = form.firstName.value + "" + form.lastName.value;
     const email = form.email.value;
     const photoURL = form.photoURL.value;
+    const exist = () => toast("User already Exist");
+    const success = () => toast("Successfully registered");
 
     createUser(email, password)
       .then((result) => {
         const user = result.user;
         navigate(from, { replace: true });
+        updateProfileInfo(name, photoURL);
+        // console.log(name, photoURL);
+
+        success();
         form.reset();
       })
+      .catch((error) => {
+        console.log(error);
+        exist();
+      });
+  };
+  const updateProfileInfo = (name, photoURL) => {
+    const profile = {
+      displayName: name,
+      photoURL: photoURL,
+    };
+    console.log(profile);
+    updateUser(profile)
+      .then(() => {})
       .catch((error) => console.error(error));
   };
-
   return (
     <div>
       {user ? (
@@ -142,6 +167,7 @@ const Register = () => {
                   Register
                 </button>
               </div>
+              <ToastContainer />
             </form>
             <div className="relative flex items-center justify-center w-full mt-6 border border-t">
               <div className="absolute px-5 bg-white">Or</div>
