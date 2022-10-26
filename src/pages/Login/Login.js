@@ -18,7 +18,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         form.reset();
-        navigate(from,{replace:true});
+        navigate(from, { replace: true });
         // navigate("/");
       })
       .catch((error) => console.error(error));
@@ -26,7 +26,7 @@ const Login = () => {
   return (
     <div>
       {user ? (
-        <Navigate to="/"></Navigate>
+        navigate(from, { replace: true })
       ) : (
         <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
           <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl lg:max-w-xl">
