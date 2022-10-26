@@ -19,7 +19,6 @@ const Login = () => {
         const user = result.user;
         form.reset();
         navigate(from, { replace: true });
-        // navigate("/");
       })
       .catch((error) => console.error(error));
   };

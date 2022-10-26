@@ -1,11 +1,18 @@
-import React from 'react';
+import React from "react";
+import { Outlet } from "react-router-dom";
+import LeftNav from "./leftNav/leftNav";
 
 const Courses = () => {
-    return (
-        <div>
-            All courses
-        </div>
-    );
+  return (
+    <div className="block md:flex mt-10">
+      <div className="w-full md:w-1/4">
+        <LeftNav></LeftNav>
+      </div>
+      <div className="w-full md:w-3/4">
+        <Outlet></Outlet>
+      </div>
+    </div>
+  );
 };
 
 export default Courses;
