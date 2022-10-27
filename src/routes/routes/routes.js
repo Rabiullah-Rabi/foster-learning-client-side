@@ -76,14 +76,14 @@ export const routes = createBrowserRouter([
         element: <FAQ></FAQ>,
       },
       {
-        path: "checkout",
+        path: "checkout/:id",
         element: (
           <PrivateRoutes>
             <Checkout></Checkout>
           </PrivateRoutes>
         ),
-        //   loader: ({ params }) =>
-        //     fetch(`https://foster-learning-rabiullah-rabi.vercel.app/course/${params.id}`),
+          loader: ({ params }) =>
+            fetch(`https://foster-learning-rabiullah-rabi.vercel.app/course/${params.id}`),
       },
     ],
   },

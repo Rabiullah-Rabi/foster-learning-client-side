@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, Navigate, useLoaderData, useLocation } from "react-router-dom";
 import Pdf from "react-to-pdf";
 
 const CourseDetails = () => {
@@ -7,6 +7,7 @@ const CourseDetails = () => {
   const { title, auhor, thumbnail_url, free, details,id } = course;
   // console.log(course);
   const ref = React.createRef();
+  const location = useLocation();
   return (
     <div className="h-screen">
       <div ref={ref}>
@@ -42,11 +43,11 @@ const CourseDetails = () => {
         </Pdf>
       </div>
       <div>
-        {/* <Link to={`../../checkout/${id}`} >
+        <Link to={`../../checkout/${id}`}>
           <button className="mt-10 bg-blue-500 text-white px-6 py-2 font-bold">
             Get premium access
           </button>
-        </Link> */}
+        </Link>
       </div>
     </div>
   );

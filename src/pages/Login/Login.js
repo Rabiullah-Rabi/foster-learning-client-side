@@ -7,20 +7,18 @@ import "react-toastify/dist/ReactToastify.css";
 const Login = () => {
   const { handleGithubSignin, handleGoogleSignin, user, emailPassSignIn } =
     useContext(AuthContext);
-  console.log(user);
   const navigate = useNavigate();
-  const loaction = useLocation();
-  const from = loaction.state?.from?.pathname || "/";
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const handlelogin = (event) => {
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    const userExist = () => toast("User Not Found");
+    const userExist = () => toast("Something Is Wrong");
     emailPassSignIn(email, password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
         form.reset();
         navigate(from, { replace: true });
       })
@@ -111,13 +109,9 @@ const Login = () => {
 
             <p className="mt-8 text-xs font-light text-center text-gray-700">
               {" "}
-              Don't have an account?{" "}
-              <Link
-                to="/register"
-                className="font-medium text-purple-600 hover:underline"
-              >
-                Sign up
-              </Link>
+                Don't have an account?{" "}
+                <Link to='/register'>Register</Link>
+              {/* <Navigate to='/register' state = {{from : location}} replace>Register</Navigate> */}
             </p>
           </div>
         </div>

@@ -16,8 +16,8 @@ const Register = () => {
     updateUser,
   } = useContext(AuthContext);
   const navigate = useNavigate();
-  const loaction = useLocation();
-  const from = loaction.state?.from?.pathname || "/";
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const handleRegisterForm = (event) => {
     event.preventDefault();
 
@@ -56,7 +56,7 @@ const Register = () => {
   return (
     <div>
       {user ? (
-        <Navigate to="/"></Navigate>
+        navigate(from, { replace: true })
       ) : (
         <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
           <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl lg:max-w-xl">
@@ -190,12 +190,7 @@ const Register = () => {
             <p className="mt-8 text-xs font-light text-center text-gray-700">
               {" "}
               Already Have an account?{" "}
-              <Link
-                to="/login"
-                className="font-medium text-purple-600 hover:underline"
-              >
-                Log In
-              </Link>
+                <Link to='/login'> Log in </Link>
             </p>
           </div>
         </div>
