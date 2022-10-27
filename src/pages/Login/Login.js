@@ -19,8 +19,8 @@ const Login = () => {
     emailPassSignIn(email, password)
       .then((result) => {
         const user = result.user;
-        form.reset();
         navigate(from, { replace: true });
+        form.reset();
       })
       .catch((error) => {
         console.log(error);
@@ -30,7 +30,10 @@ const Login = () => {
   return (
     <div>
       {user ? (
-        navigate(from, { replace: true })
+        <div className="h-screen flex items-center text-center justify-center -mt-20">
+          {" "}
+          <h1 className="text-6xl">Your are already logged in </h1>
+        </div>
       ) : (
         <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
           <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl lg:max-w-xl">
@@ -109,9 +112,7 @@ const Login = () => {
 
             <p className="mt-8 text-xs font-light text-center text-gray-700">
               {" "}
-                Don't have an account?{" "}
-                <Link to='/register'>Register</Link>
-              {/* <Navigate to='/register' state = {{from : location}} replace>Register</Navigate> */}
+              Don't have an account? <Link to="/register">Register</Link>
             </p>
           </div>
         </div>

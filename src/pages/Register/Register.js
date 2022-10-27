@@ -33,8 +33,6 @@ const Register = () => {
         const user = result.user;
         navigate(from, { replace: true });
         updateProfileInfo(name, photoURL);
-        // console.log(name, photoURL);
-
         success();
         form.reset();
       })
@@ -56,7 +54,7 @@ const Register = () => {
   return (
     <div>
       {user ? (
-        navigate(from, { replace: true })
+        navigate(from, {replace:true})
       ) : (
         <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
           <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl lg:max-w-xl">
