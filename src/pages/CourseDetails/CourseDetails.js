@@ -4,11 +4,11 @@ import Pdf from "react-to-pdf";
 
 const CourseDetails = () => {
   const course = useLoaderData([]);
-  const { title, auhor, thumbnail_url, free, details } = course;
-  console.log(course);
+  const { title, auhor, thumbnail_url, free, details,id } = course;
+  // console.log(course);
   const ref = React.createRef();
   return (
-    <div>
+    <div className="h-screen">
       <div ref={ref}>
         <div className=" bg-white shadow-md dark:bg-gray-800 dark:border-gray-700">
           <Link>
@@ -31,8 +31,22 @@ const CourseDetails = () => {
       </div>
       <div>
         <Pdf targetRef={ref} filename="Course-Details.pdf">
-          {({ toPdf }) => <button className="mt-10 bg-blue-500 text-white px-6 py-2 font-bold" onClick={toPdf}>Download As PDF</button>}
+          {({ toPdf }) => (
+            <button
+              className="mt-10 bg-blue-500 text-white px-6 py-2 font-bold"
+              onClick={toPdf}
+            >
+              Download As PDF
+            </button>
+          )}
         </Pdf>
+      </div>
+      <div>
+        {/* <Link to={`../../checkout/${id}`} >
+          <button className="mt-10 bg-blue-500 text-white px-6 py-2 font-bold">
+            Get premium access
+          </button>
+        </Link> */}
       </div>
     </div>
   );

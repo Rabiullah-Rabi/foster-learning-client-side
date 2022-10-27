@@ -22,7 +22,7 @@ const Register = () => {
     event.preventDefault();
 
     const form = event.target;
-    const name = form.firstName.value + "" + form.lastName.value;
+    const name = form.name.value;
     const email = form.email.value;
     const photoURL = form.photoURL.value;
     const exist = () => toast("User already Exist");
@@ -66,27 +66,14 @@ const Register = () => {
             <form className="mt-6" onSubmit={handleRegisterForm}>
               <div className="mb-2">
                 <label
-                  htmlFor="firstName"
+                  htmlFor="name"
                   className="block text-sm font-semibold text-gray-800"
                 >
-                  First name
+                  Full name
                 </label>
                 <input
                   required
-                  name="firstName"
-                  type="text"
-                  className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                />
-              </div>
-              <div className="mb-2">
-                <label
-                  htmlFor="lastName"
-                  className="block text-sm font-semibold text-gray-800"
-                >
-                  Last name
-                </label>
-                <input
-                  name="lastName"
+                  name="name"
                   type="text"
                   className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                 />

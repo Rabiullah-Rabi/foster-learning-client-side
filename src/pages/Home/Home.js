@@ -1,8 +1,11 @@
 import { Popover } from "@headlessui/react";
 import React from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 
 const Home = () => {
+const {user}=useContext(AuthContext)
   return (
     <div className="relative overflow-hidden bg-white h-screen">
       <div className="mx-auto">
@@ -21,16 +24,25 @@ const Home = () => {
               </p>
               <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                 <div className="rounded-md shadow">
-                  <Link
+                  {
+                    user?<Link
+                    to="/register"
+                    className="flex hidden w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 md:py-4 md:px-10 md:text-lg"
+                  >
+                    Get started
+                    </Link>
+                      :
+                      <Link
                     to="/register"
                     className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 md:py-4 md:px-10 md:text-lg"
                   >
                     Get started
                   </Link>
+                  }
                 </div>
                 <div className="mt-3 sm:mt-0 sm:ml-3">
                   <Link
-                    to="/courses"
+                    to="/allcourses/courses"
                     className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-100 px-8 py-3 text-base font-medium text-indigo-700 hover:bg-indigo-200 md:py-4 md:px-10 md:text-lg"
                   >
                     Our Courses

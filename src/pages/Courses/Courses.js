@@ -1,5 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
+import CoursesContainer from "./CoursesContainer/CoursesContainer";
 import LeftNav from "./leftNav/leftNav";
 
 const Courses = () => {
@@ -9,7 +10,7 @@ const Courses = () => {
         <LeftNav></LeftNav>
       </div>
       <div className="w-full md:w-3/4">
-        <Outlet></Outlet>
+          <Outlet />
       </div>
     </div>
   );

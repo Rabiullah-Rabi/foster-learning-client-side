@@ -1,26 +1,33 @@
 import React, { useContext } from "react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const { handleGithubSignin, handleGoogleSignin, user, emailPassSignIn } =
     useContext(AuthContext);
+  console.log(user);
   const navigate = useNavigate();
   const loaction = useLocation();
   const from = loaction.state?.from?.pathname || "/";
   const handlelogin = (event) => {
     event.preventDefault();
     const form = event.target;
-    console.log(form);
     const email = form.email.value;
     const password = form.password.value;
+    const userExist = () => toast("User Not Found");
     emailPassSignIn(email, password)
       .then((result) => {
         const user = result.user;
+        console.log(user);
         form.reset();
         navigate(from, { replace: true });
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.log(error);
+        userExist();
+      });
   };
   return (
     <div>
@@ -68,6 +75,7 @@ const Login = () => {
                 <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600">
                   Login
                 </button>
+                <ToastContainer />
               </div>
             </form>
             <div className="relative flex items-center justify-center w-full mt-6 border border-t">
