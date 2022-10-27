@@ -3,13 +3,35 @@ import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 
 const Login = () => {
-  const { handleGithubSignin, handleGoogleSignin, user, emailPassSignIn } =
+  const { providerLogIn, user, emailPassSignIn } =
     useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+// google Sign in
+const googleProvider = new GoogleAuthProvider();
+const handleGoogleSignin = () => {
+  providerLogIn(googleProvider)
+    .then(result => {
+      const user = result.user;
+      navigate(from, { replace: true });
+    })
+  .catch(error=>console.error(error))
+}
+// google Sign in
+const gitProvider = new GithubAuthProvider();
+const handleGithubSignin = () => {
+  providerLogIn(gitProvider)
+    .then(result => {
+      const user = result.user;
+      navigate(from, { replace: true });
+    })
+  .catch(error=>console.error(error))
+}
+
   const handlelogin = (event) => {
     event.preventDefault();
     const form = event.target;

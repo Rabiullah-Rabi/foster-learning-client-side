@@ -4,16 +4,16 @@ import PasswordChecklist from "react-password-checklist";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 
 const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const {
     user,
-    handleGithubSignin,
-    handleGoogleSignin,
     createUser,
     updateUser,
+    providerLogIn
   } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
@@ -51,6 +51,27 @@ const Register = () => {
       .then(() => {})
       .catch((error) => console.error(error));
   };
+
+  // google Sign in
+const googleProvider = new GoogleAuthProvider();
+const handleGoogleSignin = () => {
+  providerLogIn(googleProvider)
+    .then(result => {
+      const user = result.user;
+      navigate(from, { replace: true });
+    })
+  .catch(error=>console.error(error))
+}
+// google Sign in
+const gitProvider = new GithubAuthProvider();
+const handleGithubSignin = () => {
+  providerLogIn(gitProvider)
+    .then(result => {
+      const user = result.user;
+      navigate(from, { replace: true });
+    })
+  .catch(error=>console.error(error))
+}
   return (
     <div>
       {user ? (
