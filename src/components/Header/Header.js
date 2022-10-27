@@ -5,6 +5,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
+import ToolTip from "../ToolTip/ToolTip";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -64,12 +65,21 @@ const Header = () => {
                         "group inline-flex items-center rounded-md bg-white text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                       )}
                     >
+                      
                       <img
+                        data-tooltip-target="tooltip-for-username"
                         src={user?.photoURL}
                         alt=""
                         className="h-7 w-7 rounded rounded-full mr-2"
                       />
-
+                      <div className="absolute">
+                      <ToolTip
+                        className="bg-blue-700"
+                        position="bottom"
+                      >
+                        {user?.displayName}
+                      </ToolTip>
+                      </div>
                       <span>{user?.displayName}</span>
                       <ChevronDownIcon
                         className={classNames(
